@@ -107,7 +107,7 @@ class HotelRepository implements HotelRepositoryInterface
             dd('ff');
             return $oldPath;
         }else{
-            Storage::move('./'.$oldPath, '/uploads/'.date('Y-m-d H:i:s').'file1.jpg');
+            $oldPath->move('./'.$oldPath, '/uploads/'.date('Y-m-d H:i:s').'file1.jpg');
             return $input;
         }
 
