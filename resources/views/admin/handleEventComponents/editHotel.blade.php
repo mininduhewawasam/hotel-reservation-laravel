@@ -9,10 +9,15 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+{{--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--}}
+{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-lightbox/0.7.0/bootstrap-lightbox.min.css">--}}
+
     <!-- Bootstrap core CSS -->
     <link href="../adminPanel/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="../adminPanel/css/simple-sidebar.css" rel="stylesheet">
+    <link href="../adminPanel/css/hotel_image_viewer.css" rel="stylesheet">
+
 
 </head>
 
@@ -95,13 +100,7 @@
                     <div hidden>
                         {{ $currentHotelID = $SearchResult->hotelID}}
                     </div>
-                <div>
-                    <img src="{{$SearchResult->propThumbImg}}">
-                </div>
-                <?php $SearchResult =null;
-                $historyImgArray = explode(",", $SearchResult->propImages);
-                dd($historyImgArray);
-                ?>
+
                     <div hidden>
                         @if($SearchResult->status==1)
                             {{$buttonVal='UnPublish'}}
@@ -110,29 +109,43 @@
                         @endif
                     </div>
 
-                    <form method="post" action="{{route('unPublishHotel')}}">
-                        <input type="hidden" name="_token" value="{{csrf_token()}}">
-                        <input type="hidden" value="{{$currentHotelID}}" name="hotelId">
-                        <input type="hidden" value="{{$buttonVal}}" name="updateStatus" >
+                    <div>
+                        <form method="post" action="{{route('unPublishHotel')}}">
+                            <input type="hidden" name="_token" value="{{csrf_token()}}">
+                            <input type="hidden" value="{{$currentHotelID}}" name="hotelId">
+                            <input type="hidden" value="{{$buttonVal}}" name="updateStatus" >
+                            <button name="confirm" class="btn btn-primary">{{$buttonVal}}</button>
+                        </form>
+                    </div>
+                    <hr>
 
-                        <button name="confirm" class="btn btn-primary">{{$buttonVal}}</button>
+                        <div class="row">
+                            @foreach ($disImgArray as $key=>$data)
+                            <div class="column">
+                                <img src="{{$data}}" onclick="openModal();currentSlide({{$key}})" class="hover-shadow" width="200" height="100">
+                            </div>
+                                @endforeach
+                        </div>
 
-                    </form>
+
+                    <div id="myModal" class="modal">
+                        <span class="close cursor" onclick="closeModal()">&times;</span>
+                        <div class="modal-content">
+{{--                        @foreach ($disImgArray as $data)--}}
+                            <div class="mySlides">
+                                <img src="{{$data}}" style="width:100%">
+                            </div>
+{{--                            @endforeach--}}
+                        </div>
+
+                    </div>
                 @endif
-                <hr>
+                <br>
             </div>
             <form method="post" action="{{ route('updateData') }}" enctype="multipart/form-data">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
 
-                {{--                <div class="form-group">--}}
-                {{--                    <label for="exampleInputEmail1">Name</label>--}}
-                {{--                    <input type="text" name="hotelName" value="{{old('hotelName')}}" class="form-control"  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name">--}}
-                {{--                    <medium id="emailHelp" class="form-text text-muted">{{ $errors->has('hotelName') ? $errors->first('hotelName') : ''}}</medium>--}}
-                {{--                </div>--}}
-
                 <input type="hidden" value="{{$currentHotelID}}" name="hotelId">
-{{--                <input type="hidden" value="{{$SearchResult->start_date}}" name="dateCreated">--}}
-                {{--                <medium id="emailHelp" class="form-text text-muted">{{ $errors->has('hotelId') ? $errors->first('hotelId') : ''}}</medium>--}}
 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Description</label>
@@ -141,11 +154,7 @@
                     <medium id="emailHelp"
                             class="form-text text-muted">{{ $errors->has('hotelDesc') ? $errors->first('hotelDesc') : ''}}</medium>
                 </div>
-                {{--                <div class="form-group">--}}
-                {{--                    <label for="exampleInputEmail1">Address</label>--}}
-                {{--                    <input type="text" name="hotelAddress" value="{{old('hotelAddress')}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Address">--}}
-                {{--                    <medium id="emailHelp" class="form-text text-muted">{{ $errors->has('hotelAddress') ? $errors->first('hotelAddress') : ''}}</medium>--}}
-                {{--                </div>--}}
+
                 <div class="form-group">
                     <label for="exampleInputEmail1">E-mail</label>
                     <input type="text" name="hotelEmail" value="{{old('hotelEmail')}}" class="form-control"
@@ -210,9 +219,10 @@
 </div>
 <!-- /#wrapper -->
 
-<!-- Bootstrap core JavaScript -->
+
 <script src="../adminPanel/vendor/jquery/jquery.min.js"></script>
 <script src="../adminPanel/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../adminPanel/javascript-edit-hotel/hotel_image_viewer.js"></script>
 
 <!-- Menu Toggle Script -->
 <script>

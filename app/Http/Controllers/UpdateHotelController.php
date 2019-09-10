@@ -40,7 +40,10 @@ class UpdateHotelController extends Controller
             $SearchResult = $this->hotel->getEditHotel($request);
             if ($SearchResult) {
                 $currentHotelID = $SearchResult->hotelID;
-                return view('admin.handleEventComponents.editHotel', compact('SearchResult', 'currentHotelID'));
+
+                $disImgArray = explode(",", $SearchResult->propImages);
+
+                return view('admin.handleEventComponents.editHotel', compact('SearchResult', 'currentHotelID', 'disImgArray'));
             } else {
                 return redirect('/manage_hotels/edit_hotel')->with('Error', 'Results not found');
             }

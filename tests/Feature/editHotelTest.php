@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -12,9 +13,24 @@ class editHotelTest extends TestCase
     use DatabaseMigrations;
 
 
+//$hoteName='fdzadfadf';
+//$timeUpload=time();
+//
+//$this->post('/manage_hotels/add_new',[
+//'hotelName'=>$hoteName,
+//'hotelDesc'=>'ffffffffffffff',
+//'hotelAddress'=>'dasdsadasdsd',
+//'hotelEmail'=>'minidnu@gmail.com',
+//'hotelContact'=>'0770543421',
+//'hotelPrice'=>'212',
+//'thumbImage'=>UploadedFile::fake()->image('avatar.jpg'),
+//'displayImage'=>$imageArray,
+//
+//])->assertStatus(302);
+
     public function test_update_Description(){
 
-        $description='dsfsgfgdsgfgdfsfgh';
+        $description='ffffffffffffff';
 
         $this->post('/manage_hotels/edit_hotel',[
             'hotelId'=>'1'

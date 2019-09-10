@@ -70,6 +70,7 @@ class HotelRepository implements HotelRepositoryInterface
             'propImages' => $displayFileArray,
         ]);
 
+        dd($currenthotel);
         return $currenthotel;
     }
 

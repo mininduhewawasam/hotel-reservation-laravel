@@ -1,6 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
+use Illuminate\Support\Facades\Hash;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,11 +14,27 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\User::class, function (Faker $faker) {
+$factory->define(App\Hotel::class, function ( $faker) {
+
+    $imgfeArray=array(
+        $faker->image($dir = '/tmp', $width = 640, $height = 480),
+        $faker->image($dir = '/tmp', $width = 640, $height = 480),
+        $faker->image($dir = '/tmp', $width = 640, $height = 480),
+        $faker->image($dir = '/tmp', $width = 640, $height = 480),
+        $faker->image($dir = '/tmp', $width = 640, $height = 480)
+    );
+    $displayFileArray = implode(',', $imgfeArray);
+
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
-        'remember_token' => str_random(10),
+        'propName' => $faker->company,
+        'propDesc' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
+        'hotelEmail' => $faker->unique()->safeEmail,
+        'propContact' => 0770543421,
+        'propAddress' => $faker->address,
+        'propPriceNew' => 1997,
+        'propPriceOld' => 123,
+        'propThumbImg' => $faker->image($dir = '/tmp', $width = 640, $height = 480),
+        'start_date' => $faker->dateTime($max = 'now', $timezone = 'Asia/Colombo'),
+        'propImages' => $displayFileArray,
     ];
 });

@@ -2,7 +2,9 @@
 
 namespace Tests\Unit;
 
+use App\Repositories\Interfaces\HotelRepositoryInterface;
 use Illuminate\Http\UploadedFile;
+use Mockery;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -10,6 +12,61 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class manageEventTest extends TestCase
 {
+
+    protected $hotelRepo;
+
+    public function tearDown(){
+        parent::tearDown();
+        Mockery::close();
+    }
+
+    public function setUp(){
+        parent::setUp();
+        $this->mock();
+    }
+
+
+    public function mock(){
+        $this->hotelRepo = Mockery::mock(HotelRepositoryInterface::class);
+        $this->app->instance(HotelRepositoryInterface::class, $this->hotelRepo);
+    }
+
+
+    public function test_add_hotel_with_all_data(){
+//        $this->userLogsRepo = Mockery::mock(UserRepositoryInterface::class);
+
+        $message='';
+        $status =true;
+        $userID ='3';
+        $userFName ='Minindu';
+
+
+        $this->hotelRepo->shouldReceive('addHotel')->once()
+            ->andReturn('fffffggggg');
+
+        Storage::fake('public');
+
+        $imageArray=array(UploadedFile::fake()->image('avatar1.jpg'),UploadedFile::fake()->image('avatar2.jpg'));
+
+        $hoteName='fdzadfadf';
+        $timeUpload=time();
+
+        $this->post('/manage_hotels/add_new',[
+            'hotelName'=>$hoteName,
+            'hotelDesc'=>'ffffffffffffff',
+            'hotelAddress'=>'dasdsadasdsd',
+            'hotelEmail'=>'minidnu@gmail.com',
+            'hotelContact'=>'0770543421',
+            'hotelPrice'=>'212',
+            'thumbImage'=>UploadedFile::fake()->image('avatar.jpg'),
+            'displayImage'=>$imageArray,
+
+        ])->assertStatus(302);
+
+//        $this->assertDatabaseHas('hotels',[
+//            'propName'=>$hoteName,
+//        ]);
+    }
 
 //manage hotel data-------------------------------------------------------------------------------------------------
     public function test_get_view(){

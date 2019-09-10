@@ -29,6 +29,7 @@ Route::post('/manage_hotels/update_hotel', 'UpdateHotelController@makeUpdateHote
 
 Route::post('/manage_hotels/unpublish_hotel', 'UpdateHotelController@setHotelPublish')->name('unPublishHotel');
 
+Route::get('/hotel_post', 'HotelPostController@getPost')->name('view_post');
 
 //Route::get('/allhotels', 'EventController@getAllAvailableHotels')->name('allHotels');
 
