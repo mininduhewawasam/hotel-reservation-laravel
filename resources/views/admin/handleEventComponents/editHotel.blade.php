@@ -95,6 +95,13 @@
                     <div hidden>
                         {{ $currentHotelID = $SearchResult->hotelID}}
                     </div>
+                <div>
+                    <img src="{{$SearchResult->propThumbImg}}">
+                </div>
+                <?php $SearchResult =null;
+                $historyImgArray = explode(",", $SearchResult->propImages);
+                dd($historyImgArray);
+                ?>
                     <div hidden>
                         @if($SearchResult->status==1)
                             {{$buttonVal='UnPublish'}}

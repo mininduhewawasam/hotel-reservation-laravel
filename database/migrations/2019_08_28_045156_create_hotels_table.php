@@ -24,7 +24,7 @@ class CreateHotelsTable extends Migration
             $table->integer('propPriceOld')->notNullValue()->default(0);
             $table->integer('propPriceNew')->notNullValue();
             $table->string('propThumbImg')->notNullValue();
-            $table->string('propImages')->notNullValue();
+            $table->longText('propImages')->notNullValue();
             $table->dateTime('start_date');
             $table->dateTime('end_date')->nullable();
             $table->integer('status')->default(1);

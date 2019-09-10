@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('clientSide.home');
 });
 
 Route::get('/manage_hotels/add_new', 'AddNewController@createEventGetView')->name('addNew');
