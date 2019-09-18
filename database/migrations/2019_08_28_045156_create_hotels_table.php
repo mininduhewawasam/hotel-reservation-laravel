@@ -21,7 +21,6 @@ class CreateHotelsTable extends Migration
             $table->string('hotelEmail')->notNullValue();
             $table->string('propContact')->notNullValue();
             $table->string('propAddress')->notNullValue();
-            $table->integer('propPriceOld')->notNullValue()->default(0);
             $table->integer('propPriceNew')->notNullValue();
             $table->string('propThumbImg')->notNullValue();
             $table->longText('propImages')->notNullValue();

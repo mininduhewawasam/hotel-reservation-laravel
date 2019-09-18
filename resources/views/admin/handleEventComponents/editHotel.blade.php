@@ -12,7 +12,7 @@
 {{--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--}}
 {{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-lightbox/0.7.0/bootstrap-lightbox.min.css">--}}
 
-    <!-- Bootstrap core CSS -->
+<!-- Bootstrap core CSS -->
     <link href="../adminPanel/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="../adminPanel/css/simple-sidebar.css" rel="stylesheet">
@@ -63,7 +63,8 @@
             {{--            @endif--}}
             <div>
                 @if($SearchResult)
-                    <br>
+                    <hr>
+                    <label for="exampleInputEmail1"><h4>Current Data</h4></label>
                     <table class="table table-bordered">
                         <thead>
                         <tr>
@@ -113,34 +114,54 @@
                         <form method="post" action="{{route('unPublishHotel')}}">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             <input type="hidden" value="{{$currentHotelID}}" name="hotelId">
-                            <input type="hidden" value="{{$buttonVal}}" name="updateStatus" >
+                            <input type="hidden" value="{{$buttonVal}}" name="updateStatus">
                             <button name="confirm" class="btn btn-primary">{{$buttonVal}}</button>
                         </form>
                     </div>
                     <hr>
-
-                        <div class="row">
-                            @foreach ($disImgArray as $key=>$data)
-                            <div class="column">
-                                <img src="{{$data}}" onclick="openModal();currentSlide({{$key}})" class="hover-shadow" width="200" height="100">
-                            </div>
-                                @endforeach
+                    <label for="exampleInputEmail1">Post Thumbnail Image</label>
+                    <div class="row">
+                        <div class="column">
+                            <img src="{{$SearchResult->propThumbImg}}" onclick="openThumb();showThumb({{0}})"
+                                 class="hover-shadow"
+                                 width="200" height="100">
                         </div>
+                    </div>
+
+                    <div id="thumbImg" class="modal">
+                        <span class="close cursor" onclick="closeThumb()">&times</span>
+                        <div class="modal-content">
+                            <div class="thumbImgCurrent">
+                                <img src="{{$SearchResult->propThumbImg}}" style="width:100%">
+                            </div>
+                        </div>
+
+                    </div>
+                    <hr>
+                    <label for="exampleInputEmail1">Post Display Images</label>
+                    <div class="row">
+                        @foreach ($disImgArray as $key=>$data)
+                            <div class="column">
+                                <img src="{{$data}}" onclick="openModal();showSlides({{$key}})" class="hover-shadow"
+                                     width="200" height="100">
+                            </div>
+                        @endforeach
+                    </div>
 
 
                     <div id="myModal" class="modal">
-                        <span class="close cursor" onclick="closeModal()">&times;</span>
+                        <span class="close cursor" onclick="closeModal()">&times</span>
                         <div class="modal-content">
-{{--                        @foreach ($disImgArray as $data)--}}
-                            <div class="mySlides">
-                                <img src="{{$data}}" style="width:100%">
-                            </div>
-{{--                            @endforeach--}}
+                            @foreach ($disImgArray as $data)
+                                <div class="mySlides">
+                                    <img src="{{$data}}" style="width:100%">
+                                </div>
+                            @endforeach
                         </div>
 
                     </div>
                 @endif
-                <br>
+                <hr>
             </div>
             <form method="post" action="{{ route('updateData') }}" enctype="multipart/form-data">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
@@ -212,6 +233,7 @@
 
                 <button name="confirm" class="btn btn-primary">Update</button>
             </form>
+            <br>
         </div>
     </div>
     <!-- /#page-content-wrapper -->

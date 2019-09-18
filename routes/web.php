@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('clientSide.home');
-});
+Route::get('/', 'HomePageController@getHomePage');
+
+Route::post('/', 'HomePageController@clientSearch');
 
 Route::get('/manage_hotels/add_new', 'AddNewController@createEventGetView')->name('addNew');
 
@@ -29,8 +29,16 @@ Route::post('/manage_hotels/update_hotel', 'UpdateHotelController@makeUpdateHote
 
 Route::post('/manage_hotels/unpublish_hotel', 'UpdateHotelController@setHotelPublish')->name('unPublishHotel');
 
+Route::get('/manage_hotels/edit_history', 'HistoryEditController@editHistoryGetView')->name('editHistory');
+
+Route::post('/manage_hotels/edit_history', 'HistoryEditController@searchHotel')->name('getHotel');
+
+Route::post('/manage_hotels/get_history', 'HistoryEditController@getHistoryHotel')->name('getHistory');
+
+Route::post('/manage_hotels/revert_history', 'HistoryEditController@revertHotelHistory')->name('revertBack');
+
 Route::get('/hotel_post', 'HotelPostController@getPost')->name('view_post');
 
 //Route::get('/allhotels', 'EventController@getAllAvailableHotels')->name('allHotels');
 
-Route::get('/verify_request', 'RequestController@index')->name('handleRequestTest');
+//Route::get('/verify_request', 'RequestController@index')->name('handleRequestTest');

@@ -94,7 +94,7 @@
                                     <label class="custom-file-label" for="inputGroupFile01">Choose image for Thumbnail</label>
                                 </div>
                             </div>
-                            <medium id="emailHelp" class="form-text text-muted">{{ $errors->has('displayImage') ? $errors->first('displayImage') : ''}}</medium>
+                            <medium id="emailHelp" class="form-text text-muted">{{ $errors->has('thumbImage') ? $errors->first('thumbImage') : ''}}</medium>
                         </div>
 
                         <div class="form-group">
@@ -109,11 +109,12 @@
                                     <label class="custom-file-label" for="inputGroupFile01">Choose image for display</label>
                                 </div>
                             </div>
-                            <medium id="emailHelp" class="form-text text-muted">{{ $errors->has('displayImage') ? $errors->first('displayImage') : ''}}</medium>
+                            <medium id="emailHelp" class="form-text text-muted">{{ $errors->has('displayImage[]') ? $errors->first('displayImage[]') : ''}}</medium>
                         </div>
 
                         <button name="confirm" class="btn btn-primary">Confirm</button>
                     </form>
+                <br>
 
 
 

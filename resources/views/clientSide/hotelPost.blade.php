@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="../myCSS/homeStyles.css" rel="stylesheet">
+{{--    <link href="../myCSS/postPageStyles.css" rel="stylesheet">--}}
+
 
     <title>Laravel</title>
 
@@ -17,6 +19,24 @@
 <header>
     @include('components.header')
 </header>
+
+<section>
+    <nav>
+        <ul>
+
+        </ul>
+    </nav>
+
+    <article>
+        <h1></h1>
+
+    </article>
+    <aside>
+        <p>asfadfadf dsfas sfs fasf</p>
+    </aside>
+</section>
+
+
 
 
 </body>

@@ -16,7 +16,6 @@ class Hotel extends Model
         'hotelEmail',
         'propContact',
         'propAddress',
-        'propPriceOld',
         'propPriceNew',
         'propThumbImg',
         'propImages',
