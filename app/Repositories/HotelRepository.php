@@ -398,6 +398,10 @@ class HotelRepository implements HotelRepositoryInterface
 
     }
 
+    /**
+     * @param $searchRequest
+     * @return mixed
+     */
     public function getHotelPost($searchRequest)
     {
         $serchHotelName = $searchRequest->input('hotelName');

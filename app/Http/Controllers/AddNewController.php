@@ -33,7 +33,7 @@ class AddNewController extends Controller
         $request->validate
         ([
             'hotelName' => 'required',
-            'hotelDesc' => 'required|max:200',
+            'hotelDesc' => 'required|max:1000',
             'hotelAddress' => 'required',
             'hotelEmail' => 'required|email',
             'hotelContact' => 'required|numeric|digits:10',
@@ -55,6 +55,5 @@ class AddNewController extends Controller
             return redirect('/manage_hotels/add_new')->with('regError', 'Something went wrong,Please try again');
         }
     }
-
 
 }

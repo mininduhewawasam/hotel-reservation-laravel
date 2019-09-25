@@ -23,4 +23,7 @@ class Hotel extends Model
         'status',
     ];
 
+    public function booking(){
+        return $this->hasMany('App\booking');
+    }
 }

@@ -11,15 +11,19 @@
 |
 */
 
+
 Route::get('/', 'HomePageController@getHomePage');
 
-Route::post('/', 'HomePageController@clientSearch');
+Route::get('/hotel_post', 'HomePageController@clientSearch')->name('getSearchPost');
+
 
 Route::get('/manage_hotels/add_new', 'AddNewController@createEventGetView')->name('addNew');
 
 Route::post('/manage_hotels/add_new', 'AddNewController@createEvent');
 
+
 Route::get('/manage_hotels/view_hotels', 'GetHotelController@viewAllGetView')->name('viewAll');
+
 
 Route::get('/manage_hotels/edit_hotel', 'UpdateHotelController@editEventGetView')->name('editHotel');
 
@@ -29,6 +33,7 @@ Route::post('/manage_hotels/update_hotel', 'UpdateHotelController@makeUpdateHote
 
 Route::post('/manage_hotels/unpublish_hotel', 'UpdateHotelController@setHotelPublish')->name('unPublishHotel');
 
+
 Route::get('/manage_hotels/edit_history', 'HistoryEditController@editHistoryGetView')->name('editHistory');
 
 Route::post('/manage_hotels/edit_history', 'HistoryEditController@searchHotel')->name('getHotel');
@@ -37,7 +42,15 @@ Route::post('/manage_hotels/get_history', 'HistoryEditController@getHistoryHotel
 
 Route::post('/manage_hotels/revert_history', 'HistoryEditController@revertHotelHistory')->name('revertBack');
 
-Route::get('/hotel_post', 'HotelPostController@getPost')->name('view_post');
+//Route::get('/hotel_post', 'HotelPostController@getPost')->name('hotelPost');
+
+Route::post('/hotel_post/make_reserve','HotelPostController@reserveNow')->name('reserve_now');
+
+Route::post('/hotel_post/confirm_reserve','BookingController@confirmReserve')->name('confirm_now');
+
+
+Route::get('/current_booking', 'BookingController@getbookingPage')->name('hotelPost');
+
 
 //Route::get('/allhotels', 'EventController@getAllAvailableHotels')->name('allHotels');
 

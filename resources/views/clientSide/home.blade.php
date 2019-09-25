@@ -27,13 +27,14 @@
         <div class="title m-b-md">
 {{--            Welcome--}}
         </div>
-        <form autocomplete="off" method="post" action="{{route('view_post')}}">
+        <form autocomplete="off" method="get" action="{{route('getSearchPost')}}">
+            <input type="hidden" name="_token" value="{{csrf_token()}}">
             <div class="autocomplete" style="width:300px;">
                 <input id="myInput" type="text" name="hotelName" value="{{old('hotelName')}}" placeholder="search">
                 <medium id="emailHelp"
                         class="form-text text-muted">{{ $errors->has('hotelName') ? $errors->first('hotelName') : ''}}</medium>
             </div>
-            <button name="confirm" class="btn btn-primary">Search</button>
+            <button class="btn btn-primary">Search</button>
         </form>
 
 

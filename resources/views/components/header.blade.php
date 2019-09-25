@@ -37,6 +37,18 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Contact Us</a>
             </li>
+{{--            <li class="nav-item">--}}
+{{--                <form autocomplete="off" method="post" action="{{route('getSearchPost')}}">--}}
+{{--                    <input type="hidden" name="_token" value="{{csrf_token()}}">--}}
+{{--                    <div class="autocomplete" style="width:300px;">--}}
+{{--                        <input id="myInput" type="text" name="hotelName" value="{{old('hotelName')}}" placeholder="search">--}}
+{{--                        <medium id="emailHelp"--}}
+{{--                                class="form-text text-muted">{{ $errors->has('hotelName') ? $errors->first('hotelName') : ''}}</medium>--}}
+{{--                    </div>--}}
+{{--                    <button class="btn btn-primary">Search</button>--}}
+{{--                </form>--}}
+{{--            </li>--}}
+
 
 
         </ul>

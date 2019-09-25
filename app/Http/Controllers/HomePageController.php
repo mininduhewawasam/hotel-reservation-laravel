@@ -17,14 +17,11 @@ class HomePageController extends Controller
 
     public function getHomePage(){
         $hotelList=$this->hotel->getHotels();
-//        dd($hotelList->propName);
         $hotelNames=array();
         foreach ($hotelList as $hotelName){
             $hotelNames[]=$hotelName->propName;
         }
         $jsArray=json_encode($hotelNames);
-//        dd($hotelNames);
-
         return view('clientSide.home',compact('hotelNames','jsArray'));
     }
 
@@ -36,10 +33,10 @@ class HomePageController extends Controller
         try {
             $hotelPost = $this->hotel->getHotelPost($request);
             if ($hotelPost) {
-//                dd($historyRecord->end_date);
                 $currentHotelID = $hotelPost->hotelID;
                 $disImgArray = explode(",", $hotelPost->propImages);
-                return redirect('/hotel_post', compact('hotelPost','currentHotelID','disImgArray'));
+                return view('clientSide.hotelPost', compact('hotelPost','currentHotelID','disImgArray'));
+//                return redirect('/hotel_post')->with([$hotelPost,'currentHotelID'=>$currentHotelID,'disImgArray'=>$disImgArray]);
             } else {
                 return redirect('/')->with('Error', 'Results not found');
             }

@@ -48,7 +48,6 @@
                             {{ Session::get('regError') }}
                         @endif
 
-
                     <form method="post" action="{{ route('addNew') }}" enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="{{csrf_token()}}">
                         <div class="form-group">

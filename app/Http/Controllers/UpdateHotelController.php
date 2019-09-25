@@ -31,7 +31,6 @@ class UpdateHotelController extends Controller
      */
     public function searchHotel(Request $request)
     {
-
         $request->validate([
             'hotelId' => 'required|numeric',
         ]);

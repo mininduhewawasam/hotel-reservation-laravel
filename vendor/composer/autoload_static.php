@@ -351,6 +351,8 @@ class ComposerStaticInit03aeab5cccf357d1390785f80ae26c21
     );
 
     public static $classMap = array (
+        'App\\Bookings' => __DIR__ . '/../..' . '/app/Bookings.php',
+        'App\\Client' => __DIR__ . '/../..' . '/app/Client.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Hotel' => __DIR__ . '/../..' . '/app/Hotel.php',
@@ -359,6 +361,7 @@ class ComposerStaticInit03aeab5cccf357d1390785f80ae26c21
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
+        'App\\Http\\Controllers\\BookingController' => __DIR__ . '/../..' . '/app/Http/Controllers/BookingController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\EventController' => __DIR__ . '/../..' . '/app/Http/Controllers/EventController.php',
         'App\\Http\\Controllers\\GetHotelController' => __DIR__ . '/../..' . '/app/Http/Controllers/GetHotelController.php',
@@ -383,7 +386,6 @@ class ComposerStaticInit03aeab5cccf357d1390785f80ae26c21
         'App\\Repositories\\Interfaces\\bookingRepositoryInterface' => __DIR__ . '/../..' . '/app/Repositories/Interfaces/BookingRepositoryInterface.php',
         'App\\Traits\\UploadTrait' => __DIR__ . '/../..' . '/app/Traits/UploadTrait.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
-        'App\\booking' => __DIR__ . '/../..' . '/app/booking.php',
         'ArithmeticError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/ArithmeticError.php',
         'AssertionError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/AssertionError.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',

@@ -1,62 +1,189 @@
+.parentContainer{
+    width: 100%;
+    height: 100%;
+    max-width: 1366px;
+    padding-top: 10px;
+    padding-left: 30px;
+    /*position: relative;*/
+}
+
+.hotel_name{
+    float: left;
+    padding-left: 10px;
+    padding-top: 10px;
+    position: absolute;
+}
+
+.hotel_rating{
+    float: right;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.hotel_data{
+    width: 100%;
+    max-width: 910px;
+    background-color: rgba(183, 186, 187, 0.07);
+    padding: 10px;
+    float: left;
+    position: relative;
+}
+
+.booking_form{
+    width: 28%;
+    max-width:450px ;
+    float: right;
+    padding-top: 10px;
+    padding-right: 20px;
+}
+
+.booking_form{
+    position: sticky;
+    bottom: 0;
+}
+
+.similar_posts{
+    width: 30%;
+    height: 200px;
+    max-width:450px ;
+    float: right;
+    padding: 10px;
+}
+
+.similar_post_container{
+    overflow: scroll;
+    height: 200px;
+}
+
+.display_images{
+    padding: 10px;
+}
+
+.hotel_Desc{
+    padding: 10px;
+}
+
+.contact_details{
+    padding: 10px;
+}
+
+.hotel_price{
+    padding: 10px;
+}
+
+.user_reviews{
+    width: 100%;
+    max-width: 910px;
+    padding: 10px;
+    float: left;
+}
+
+
+.row > .column {
+    padding: 10px;
+
+}
+
+
+/*css for image view*/
 * {
     box-sizing: border-box;
 }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-/*!* Style the header *!*/
-/*header {*/
-/*    background-color: #666;*/
-/*    padding: 30px;*/
-/*    text-align: center;*/
-/*    font-size: 35px;*/
-/*    color: white;*/
+/* Position the image container (needed to position the left and right arrows) */
+/*.container {*/
+/*    position: relative;*/
+/*    float: left;*/
+/*    width: 70%;*/
+/*    height: auto;*/
 /*}*/
 
- /*Create two columns/boxes that floats next to each other*/
-nav {
-    float: left;
-    width: 30%;
-    height: 300px; /* only for demonstration, should be removed */
-    background: #ccc;
-    padding: 20px;
+/* Hide the images by default */
+.mySlides {
+    display: none;
 }
 
-/* Style the list inside the menu */
-nav ul {
-    list-style-type: none;
-    padding: 0;
+.mySlides img {
+
 }
 
-article {
-    float: left;
-    padding: 20px;
-    width: 70%;
-    background-color: #f1f1f1;
-    height: 300px; /* only for demonstration, should be removed */
+/* Add a pointer when hovering over the thumbnail images */
+.cursor {
+    cursor: pointer;
 }
 
-/* Clear floats after the columns */
-section:after {
+/* Next & previous buttons */
+.prev,
+.next {
+    cursor: pointer;
+    /*position: absolute;*/
+    width: auto;
+    height: 480px;
+    margin-top: 10px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 40px;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.next_area{
+    left: 850px;
+}
+
+.prev_area, .next_area{
+    position: absolute;
+    height: 450px;
+    top: 300px;
+}
+
+
+/*!* Position the "next button" to the right *!*/
+/*.next {*/
+/*    right: 400px;*/
+/*    border-radius: 3px 0 0 3px;*/
+/*}*/
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+    background-color: rgba(57, 63, 65, 0.74);
+}
+
+
+
+.row:after {
     content: "";
     display: table;
     clear: both;
 }
 
-/* Style the footer */
-footer {
-    background-color: #777;
-    padding: 10px;
-    text-align: center;
-    color: white;
+/* Six columns side by side */
+
+.big_img{
+    width: 875px;
+    height:480px;
+    position: relative;
 }
 
-/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
-@media (max-width: 600px) {
-    nav, article {
-        width: 100%;
-        height: auto;
-    }
+.small_img{
+    width: 100%;
+    height: 100%;
+}
+
+.column {
+    float: left;
+    width: 180px;
+    height: 110px;
+}
+
+.demo {
+    opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+    opacity: 1;
 }
