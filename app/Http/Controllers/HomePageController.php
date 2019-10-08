@@ -10,22 +10,47 @@ class HomePageController extends Controller
 {
     protected $hotel;
 
+    /***
+     * HomePageController constructor.
+     * @param HotelRepositoryInterface $hotel
+     */
     function __construct(HotelRepositoryInterface $hotel)
     {
-        $this->hotel=$hotel;
+        $this->hotel = $hotel;
     }
 
-    public function getHomePage(){
-        $hotelList=$this->hotel->getHotels();
-        $hotelNames=array();
-        foreach ($hotelList as $hotelName){
-            $hotelNames[]=$hotelName->propName;
+    public function index(){
+
+        $hotelList = $this->hotel->getHotels();
+        $hotelNames = array();
+        foreach ($hotelList as $hotelName) {
+            $hotelNames[] = $hotelName->propName;
         }
-        $jsArray=json_encode($hotelNames);
-        return view('clientSide.home',compact('hotelNames','jsArray'));
+//        $jsArray = json_encode($hotelNames);
+        return $hotelNames->toJson();
+
     }
 
-    public function clientSearch(Request $request){
+    /***
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getHomePage()
+    {
+        $hotelList = $this->hotel->getHotels();
+        $hotelNames = array();
+        foreach ($hotelList as $hotelName) {
+            $hotelNames[] = $hotelName->propName;
+        }
+        $jsArray = json_encode($hotelNames);
+        return view('clientSide.home', compact('hotelNames', 'jsArray'));
+    }
+
+    /***
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    public function clientSearch(Request $request)
+    {
         $request->validate([
             'hotelName' => 'required',
         ]);
@@ -35,7 +60,7 @@ class HomePageController extends Controller
             if ($hotelPost) {
                 $currentHotelID = $hotelPost->hotelID;
                 $disImgArray = explode(",", $hotelPost->propImages);
-                return view('clientSide.hotelPost', compact('hotelPost','currentHotelID','disImgArray'));
+                return view('clientSide.hotelPost', compact('hotelPost', 'currentHotelID', 'disImgArray'));
 //                return redirect('/hotel_post')->with([$hotelPost,'currentHotelID'=>$currentHotelID,'disImgArray'=>$disImgArray]);
             } else {
                 return redirect('/')->with('Error', 'Results not found');
@@ -46,5 +71,4 @@ class HomePageController extends Controller
             return redirect('/')->with('Error', 'Something went wrong,Please try again');
         }
     }
-    //
 }

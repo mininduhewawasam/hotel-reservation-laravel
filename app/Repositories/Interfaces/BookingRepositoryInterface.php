@@ -12,4 +12,16 @@ interface bookingRepositoryInterface
 
     public function verifyBooking();
 
+    public function calcTotalPrice($checkinDate, $checkOutDate, $recordID, $numOfAdults, $numOfChild, $noOfRooms);
+
+    public function getHotelCurrentBookings($hotelID);
+
+    public function getHotelAllBookings($hotelID);
+
+    public function getHotelApprovedBookings($hotelID);
+
+    public function getHotelPendingBookings($hotelID);
+
+    public function getHotelRejectedBookings($hotelID);
+
 }

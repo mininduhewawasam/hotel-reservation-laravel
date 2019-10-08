@@ -132,7 +132,7 @@ class HotelRepository implements HotelRepositoryInterface
      */
     public function getHotels()
     {
-        $hotels = DB::table('hotels')->where('current_flag', 1)->orderBy('hotelID', 'asc')->get();
+        $hotels = DB::table('hotels')->where([['current_flag', 1],['status',1]])->orderBy('hotelID', 'asc')->get();
         return $hotels;
     }
 

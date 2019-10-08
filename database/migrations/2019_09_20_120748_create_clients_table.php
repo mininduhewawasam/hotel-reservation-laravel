@@ -19,7 +19,6 @@ class CreateClientsTable extends Migration
             $table->string('last_name')->notNullValue();
             $table->string('email')->notNullValue();
             $table->string('contact_number')->notNullValue();
-            $table->longText('special_requests')->notNullValue();
 
             $table->timestamps();
         });

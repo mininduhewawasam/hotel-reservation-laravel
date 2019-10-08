@@ -3,7 +3,7 @@
 jQuery(document).ready(function($){
     // media query event handler
     if (matchMedia) {
-        var mq = window.matchMedia("(max-width: 767px)");
+        var mq = window.matchMedia("(max-width: 50em)");
         mq.addListener(WidthChange);
         WidthChange(mq);
     }

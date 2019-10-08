@@ -10,6 +10,10 @@ class UpdateHotelController extends Controller
 {
     protected $hotel;
 
+    /***
+     * UpdateHotelController constructor.
+     * @param HotelRepositoryInterface $hotel
+     */
     function __construct(HotelRepositoryInterface $hotel)
     {
         $this->hotel = $hotel;
@@ -63,7 +67,7 @@ class UpdateHotelController extends Controller
         $request->validate
         ([
             'hotelId' => 'required',
-            'hotelDesc' => 'nullable|max:200',
+            'hotelDesc' => 'nullable|max:1000',
             'hotelAddress' => 'nullable',
             'hotelEmail' => 'nullable|email',
             'hotelContact' => 'nullable|numeric|digits:10',

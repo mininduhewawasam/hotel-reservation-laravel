@@ -15,151 +15,174 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
-
 </head>
 <body>
+
 <header>
     @include('components.header')
 </header>
-<div class="parentContainer">
-    <div class="hotel_data">
-        <h3>Current Booking Details</h3>
-        <hr>
-        <table>
-            <tr>
-                <td>Checkin Date : </td>
-                <td>{{$checkinDate}}</td>
-                <td>Checkout Date : </td>
-                <td>{{$checkOutDate}}</td>
-            </tr>
-            <tr>
-                <td>No Of Adults : </td>
-                <td>{{$noOfAdults}}</td>
-                @if($noOfChildren)
-                    <td>No of Children : </td>
-                    <td>{{$noOfChildren}}</td>
+<div class="container">
+    <div class="booking_content">
+        <div class="parentContainer">
+            <div class="hotel_data">
+                <h3>Current Booking Details</h3>
+                @if(Session::has('bookConfirmMsg'))
+                    {{ Session::get('bookConfirmMsg') }}
                 @endif
-            </tr>
-            <tr>
-                <td>No of Rooms : </td>
-                <td>{{$noOfRooms}}</td>
-            </tr>
-        </table>
-        <hr>
-        <h5>Please Enter Your Details</h5>
-        <form method="post" action="{{route('confirm_now')}}" enctype="multipart/form-data">
-            <input type="hidden" name="_token" value="{{csrf_token()}}">
+{{--                {{dd(json_encode(Session::get('bookingData')))}}--}}
+                <hr>
+                <table>
+                    <tr>
+                        <td>Checkin Date</td>
+                        <td>:</td>
+                        <td>{{Session::get('bookingData')['checkinDate']}}</td>
+                        <td>Checkout Date</td>
+                        <td>:</td>
+                        <td>{{Session::get('bookingData')['checkOutDate']}}</td>
+                    </tr>
+                    <tr>
+                        <td>No Of Adults</td>
+                        <td>:</td>
+                        <td>{{Session::get('bookingData')['noOfAdults']}}</td>
+                        @if(Session::get('bookingData')['noOfChildren'])
+                            <td>No of Children</td>
+                            <td>:</td>
+                            <td>{{Session::get('bookingData')['noOfChildren']}}</td>
+                        @endif
+                    </tr>
+                    <tr>
+                        <td>No of Rooms</td>
+                        <td>:</td>
+                        <td>{{Session::get('bookingData')['noOfRooms']}}</td>
+                        <td>Total Price</td>
+                        <td>:</td>
+                        <td>LKR {{Session::get('bookingData')['totalPrice']}}</td>
 
-            <input type="hidden" name="checkInDate" value="{{$checkinDate}}">
+                    </tr>
+                </table>
+                <hr>
+                <h5>Please Enter Your Details</h5>
+                <form method="post" action="{{route('confirm_now')}}" enctype="multipart/form-data">
+                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                    <input type="hidden" name="hotelRecordID" value="{{Session::get('bookingData')['hotelRecordID']}}">
 
-            <input type="hidden" name="checkOutDate" value="{{$checkOutDate}}">
+                    <input type="hidden" name="checkInDate" value="{{Session::get('bookingData')['checkinDate']}}">
 
-            <input type="hidden" name="noOfAdults" value="{{$noOfAdults}}">
-            <input type="hidden" name="noOfChildren" value="{{$noOfChildren}}">
-            <input type="hidden" name="noOfRooms" value="{{$noOfRooms}}">
+                    <input type="hidden" name="checkOutDate" value="{{Session::get('bookingData')['checkOutDate']}}">
+
+                    <input type="hidden" name="noOfAdults" value="{{Session::get('bookingData')['noOfAdults']}}">
+                    <input type="hidden" name="noOfChildren" value="{{Session::get('bookingData')['noOfChildren']}}">
+                    <input type="hidden" name="noOfRooms" value="{{Session::get('bookingData')['noOfRooms']}}">
 
 
-            <div class="form-group">
-                <label for="exampleInputEmail1">First Name</label>
-                <input type="text" name="guestFirstName" value="{{old('guestFirstName')}}" class="form-control"
-                       id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Guest First Name">
-                <medium id="emailHelp"
-                        class="form-text text-muted">{{ $errors->has('guestFirstName') ? $errors->first('guestFirstName') : ''}}</medium>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">First Name</label>
+                        <input type="text" name="guestFirstName" value="{{old('guestFirstName')}}" class="form-control"
+                               id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Guest First Name">
+                        <medium id="emailHelp"
+                                class="form-text text-muted">{{ $errors->has('guestFirstName') ? $errors->first('guestFirstName') : ''}}</medium>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Last Name</label>
+                        <input type="text" name="GuestLastName" value="{{old('GuestLastName')}}" class="form-control"
+                               id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Guest Last Name">
+                        <medium id="emailHelp"
+                                class="form-text text-muted">{{ $errors->has('GuestLastName') ? $errors->first('GuestLastName') : ''}}</medium>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">E-Mail</label>
+                        <input type="text" name="guestEmail" value="{{old('guestEmail')}}" class="form-control"
+                               id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Guest E-mail">
+                        <medium id="emailHelp"
+                                class="form-text text-muted">{{ $errors->has('guestEmail') ? $errors->first('guestEmail') : ''}}</medium>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Contact No</label>
+                        <input type="text" name="guestContactNo" value="{{old('guestContactNo')}}" class="form-control"
+                               id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Guest Contact Number">
+                        <medium id="emailHelp"
+                                class="form-text text-muted">{{ $errors->has('guestContactNo') ? $errors->first('guestContactNo') : ''}}</medium>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Special Requests</label>
+                        <textarea class="form-control" name="specialRequests" id="exampleFormControlTextarea1" placeholder="Please add special requests on your reservation here" rows="3">{{old('specialRequests')}}</textarea>
+                        <medium id="emailHelp" class="form-text text-muted">{{ $errors->has('specialRequests') ? $errors->first('specialRequests') : ''}}</medium>
+                    </div>
+
+
+
+
+                    <button name="confirm" class="btn btn-primary">Reserve</button>
+
+                </form>
+                <hr>
             </div>
 
-            <div class="form-group">
-                <label for="exampleInputEmail1">Last Name</label>
-                <input type="text" name="GuestLastName" value="{{old('GuestLastName')}}" class="form-control"
-                       id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Guest Last Name">
-                <medium id="emailHelp"
-                        class="form-text text-muted">{{ $errors->has('GuestLastName') ? $errors->first('GuestLastName') : ''}}</medium>
+        </div>
+
+        <div class="booking_form">
+            <div class="reserve_form">
+                <h3>Booking Details</h3>
+                <form method="post" class="reserve_form" action="{{route('reserve_now')}}" >
+                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                    <input type="hidden" name="hotel_record_ID" value="{{Session::get('bookingData')['hotelRecordID']}}">
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Check In Date</label>
+                        <input type="date" name="checkInDate" value="{{Session::get('bookingData')['checkinDate']}}" class="form-control"
+                               id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <medium id="emailHelp"
+                                class="form-text text-muted">{{ $errors->has('checkInDate') ? $errors->first('checkInDate') : ''}}</medium>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Check Out Date</label>
+                        <input type="date" name="checkOutDate" value="{{Session::get('bookingData')['checkOutDate']}}" class="form-control"
+                               id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <medium id="emailHelp"
+                                class="form-text text-muted">{{ $errors->has('checkOutDate') ? $errors->first('checkOutDate') : ''}}</medium>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">No of Adults</label>
+                        <input type="number" name="noOfAdults" value="{{Session::get('bookingData')['noOfAdults']}}" min="1" class="form-control"
+                               id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter No of adults">
+                        <medium id="emailHelp"
+                                class="form-text text-muted">{{ $errors->has('noOfAdults') ? $errors->first('noOfAdults') : ''}}</medium>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">No of Children</label>
+                        <input type="number" name="noOfChildren" value="{{Session::get('bookingData')['noOfChildren']}}" value min="0" class="form-control"
+                               id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="No of children">
+                        <medium id="emailHelp"
+                                class="form-text text-muted">{{ $errors->has('noOfChildren') ? $errors->first('noOfChildren') : ''}}</medium>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">No of Rooms</label>
+                        <input type="number" name="noOfRooms" value="{{Session::get('bookingData')['noOfRooms']}}" min="1" class="form-control"
+                               id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="No of rooms">
+                        <medium id="emailHelp"
+                                class="form-text text-muted">{{ $errors->has('noOfRooms') ? $errors->first('noOfRooms') : ''}}</medium>
+                    </div>
+
+                    <button name="confirm" class="btn btn-primary">Update</button>
+
+                </form>
+                <hr>
             </div>
+        </div>
 
-            <div class="form-group">
-                <label for="exampleInputEmail1">E-Mail</label>
-                <input type="text" name="guestEmail" value="{{old('guestEmail')}}" class="form-control"
-                       id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Guest E-mail">
-                <medium id="emailHelp"
-                        class="form-text text-muted">{{ $errors->has('guestEmail') ? $errors->first('guestEmail') : ''}}</medium>
-            </div>
-
-            <div class="form-group">
-                <label for="exampleInputEmail1">Contact No</label>
-                <input type="text" name="guestContactNo" value="{{old('guestContactNo')}}" class="form-control"
-                       id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Guest Contact Number">
-                <medium id="emailHelp"
-                        class="form-text text-muted">{{ $errors->has('guestContactNo') ? $errors->first('guestContactNo') : ''}}</medium>
-            </div>
-
-            <div class="form-group">
-                <label for="exampleInputEmail1">Special Requests</label>
-                <textarea class="form-control" name="specialRequests" id="exampleFormControlTextarea1" placeholder="Please add special requests on your reservation here" rows="3">{{old('specialRequests')}}</textarea>
-                <medium id="emailHelp" class="form-text text-muted">{{ $errors->has('specialRequests') ? $errors->first('specialRequests') : ''}}</medium>
-            </div>
-
-
-
-
-            <button name="confirm" class="btn btn-primary">Reserve</button>
-
-        </form>
-        <hr>
     </div>
+
 
 </div>
 
-<div class="booking_form">
-    <div class="reserve_form">
-        <h3>Booking Details</h3>
-        <form method="post" class="reserve_form" action="{{route('reserve_now')}}" >
-            <input type="hidden" name="_token" value="{{csrf_token()}}">
-
-            <div class="form-group">
-                <label for="exampleInputEmail1">Check In Date</label>
-                <input type="date" name="checkInDate" value="{{$checkinDate}}" class="form-control"
-                       id="exampleInputEmail1" aria-describedby="emailHelp">
-                <medium id="emailHelp"
-                        class="form-text text-muted">{{ $errors->has('checkInDate') ? $errors->first('checkInDate') : ''}}</medium>
-            </div>
-
-            <div class="form-group">
-                <label for="exampleInputEmail1">Check Out Date</label>
-                <input type="date" name="checkOutDate" value="{{$checkOutDate}}" class="form-control"
-                       id="exampleInputEmail1" aria-describedby="emailHelp">
-                <medium id="emailHelp"
-                        class="form-text text-muted">{{ $errors->has('checkOutDate') ? $errors->first('checkOutDate') : ''}}</medium>
-            </div>
-
-            <div class="form-group">
-                <label for="exampleInputEmail1">No of Adults</label>
-                <input type="number" name="noOfAdults" value="{{$noOfAdults}}" min="1" class="form-control"
-                       id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter No of adults">
-                <medium id="emailHelp"
-                        class="form-text text-muted">{{ $errors->has('noOfAdults') ? $errors->first('noOfAdults') : ''}}</medium>
-            </div>
-
-            <div class="form-group">
-                <label for="exampleInputEmail1">No of Children</label>
-                <input type="number" name="noOfChildren" value="{{$noOfChildren}}" value min="1" class="form-control"
-                       id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="No of children">
-                <medium id="emailHelp"
-                        class="form-text text-muted">{{ $errors->has('noOfChildren') ? $errors->first('noOfChildren') : ''}}</medium>
-            </div>
-
-            <div class="form-group">
-                <label for="exampleInputEmail1">No of Rooms</label>
-                <input type="number" name="noOfRooms" value="{{$noOfRooms}}" min="1" class="form-control"
-                       id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="No of rooms">
-                <medium id="emailHelp"
-                        class="form-text text-muted">{{ $errors->has('noOfRooms') ? $errors->first('noOfRooms') : ''}}</medium>
-            </div>
-
-            <button name="confirm" class="btn btn-primary">Update</button>
-
-        </form>
-        <hr>
-    </div>
-</div>
 
 <script src="../adminPanel/javascript-edit-hotel/hotel_image_viewer.js"></script>
 
@@ -256,6 +279,8 @@
         modal.style.display = "none";
     }
 </script>
+
+
 
 </body>
 </html>

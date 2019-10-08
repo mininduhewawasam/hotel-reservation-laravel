@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\Interfaces\bookingRepositoryInterface;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class BookingController extends Controller
 {
@@ -13,28 +15,18 @@ class BookingController extends Controller
      * BookingController constructor.
      * @param bookingRepositoryInterface $booking
      */
-    public function __construct( bookingRepositoryInterface $booking)
+    public function __construct(bookingRepositoryInterface $booking)
     {
         $this->booking = $booking;
     }
+
 
     /***
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function getbookingPage()
     {
-
-        $checkinDate = null;
-        $checkOutDate = null;
-        $noOfAdults = null;
-        $noOfChildren = null;
-        $noOfRooms = null;
-
-        return view('clientSide.currentBooking', compact('checkinDate',
-            'noOfAdults',
-            'noOfChildren',
-            'noOfRooms'
-        ));
+        return view('clientSide.currentBooking');
     }
 
     /***
@@ -50,12 +42,22 @@ class BookingController extends Controller
             'guestEmail' => 'required',
             'guestContactNo' => 'required',
             'specialRequests' => 'nullable',
+
         ]);
 
-        $currentBooking=$this->booking->reserveBooking($request);
-
-        if ($currentBooking){
-            return redirect('/');
+        try {
+            $currentBooking = $this->booking->reserveBooking($request);
+            if ($currentBooking) {
+//                $request->session()->flash('bookConfirmMsg', 'Booking Success. You will receive a E-mail when you reservation is approved!');
+                return redirect()->back();
+            } else {
+                $request->session()->flash('regError', 'Something went wrong,Please try again');
+                return redirect::back();
+            }
+        } catch (QueryException $e) {
+            $request->session()->flash('regError', 'Something went wrong,Please try again');
+        } catch (\Exception $e) {
+            $request->session()->flash('regError', 'Something went wrong,Please try again');
         }
 
     }

@@ -125,7 +125,7 @@ Operations is a list of the following options (--dump by default):
     -r, --with-recovery     Use parsing with error recovery
     -h, --help              Display this page
 
-Example:
+App:
     php-parse -d -p -N -d file.php
 
     Dumps nodes, pretty prints them, then resolves names and dumps them again.

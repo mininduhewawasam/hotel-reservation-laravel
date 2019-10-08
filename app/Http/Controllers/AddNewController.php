@@ -10,6 +10,10 @@ class AddNewController extends Controller
 {
     protected $hotel;
 
+    /***
+     * AddNewController constructor.
+     * @param HotelRepositoryInterface $hotel
+     */
     function __construct(HotelRepositoryInterface $hotel)
     {
         $this->hotel = $hotel;

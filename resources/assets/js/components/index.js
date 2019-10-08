@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 
 export default class Example extends Component {
@@ -22,5 +22,5 @@ export default class Example extends Component {
 }
 
 if (document.getElementById('example')) {
-    ReactDOM.render(<Example />, document.getElementById('example'));
+    ReactDOM.render(<Example/>, document.getElementById('example'));
 }

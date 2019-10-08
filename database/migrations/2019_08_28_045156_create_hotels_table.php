@@ -15,7 +15,7 @@ class CreateHotelsTable extends Migration
     {
         Schema::create('hotels', function (Blueprint $table) {
             $table->increments('record_ID');
-            $table->string('hotelID')->notNullValue();
+            $table->integer('hotelID')->notNullValue();
             $table->string('propName')->notNullValue();//make unique
             $table->longText('propDesc')->notNullValue();
             $table->string('hotelEmail')->notNullValue();

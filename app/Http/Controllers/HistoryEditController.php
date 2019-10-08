@@ -11,22 +11,32 @@ class HistoryEditController extends Controller
 
     protected $hotel;
 
+    /***
+     * HistoryEditController constructor.
+     * @param HotelRepositoryInterface $hotel
+     */
     function __construct(HotelRepositoryInterface $hotel)
     {
         $this->hotel = $hotel;
     }
 
+    /***
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function editHistoryGetView()
     {
         $SearchResult = null;
         $currentHotelID = null;
-        $historyRecord=null;
-        return view('admin.handleEventComponents.HistoryEditHotel', compact('SearchResult', 'currentHotelID','historyRecord'));
+        $historyRecord = null;
+        return view('admin.handleEventComponents.HistoryEditHotel', compact('SearchResult', 'currentHotelID', 'historyRecord'));
     }
 
+    /***
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function searchHotel(Request $request)
     {
-
         $request->validate([
             'hotelId' => 'required|numeric',
         ]);
@@ -37,8 +47,8 @@ class HistoryEditController extends Controller
 //                dd($SearchResult);
 //                $currentHotelID = $SearchResult->hotelID;
 //                $disImgArray = explode(",", $SearchResult->propImages);
-                $historyRecord=null;
-                return view('admin.handleEventComponents.HistoryEditHotel', compact('SearchResult','historyRecord'));
+                $historyRecord = null;
+                return view('admin.handleEventComponents.HistoryEditHotel', compact('SearchResult', 'historyRecord'));
             } else {
                 return redirect('/manage_hotels/edit_history')->with('Error', 'Results not found');
             }
@@ -50,6 +60,10 @@ class HistoryEditController extends Controller
 
     }
 
+    /***
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function getHistoryHotel(Request $request)
     {
         $request->validate([
@@ -62,8 +76,8 @@ class HistoryEditController extends Controller
 //                dd($historyRecord->end_date);
                 $currentHotelID = $historyRecord->hotelID;
                 $disImgArray = explode(",", $historyRecord->propImages);
-                $SearchResult=null;
-                return view('admin.handleEventComponents.HistoryEditHotel', compact('historyRecord','currentHotelID','disImgArray','SearchResult'));
+                $SearchResult = null;
+                return view('admin.handleEventComponents.HistoryEditHotel', compact('historyRecord', 'currentHotelID', 'disImgArray', 'SearchResult'));
             } else {
                 return redirect('/manage_hotels/edit_history')->with('Error', 'Results not found');
             }
@@ -74,6 +88,10 @@ class HistoryEditController extends Controller
         }
     }
 
+    /***
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function revertHotelHistory(Request $request)
     {
         $request->validate

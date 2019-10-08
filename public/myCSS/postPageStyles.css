@@ -1,11 +1,17 @@
-.parentContainer{
-    width: 100%;
-    height: 100%;
-    max-width: 1366px;
-    padding-top: 10px;
-    padding-left: 30px;
-    /*position: relative;*/
+.container{
+
 }
+
+
+
+/*.parentContainer{*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    max-width: 1366px;*/
+/*    padding-top: 10px;*/
+/*    padding-left: 30px;*/
+/*    !*position: relative;*!*/
+/*}*/
 
 .hotel_name{
     float: left;
@@ -22,7 +28,7 @@
 
 .hotel_data{
     width: 100%;
-    max-width: 910px;
+    max-width: 1110px;
     background-color: rgba(183, 186, 187, 0.07);
     padding: 10px;
     float: left;
@@ -39,7 +45,12 @@
 
 .booking_form{
     position: sticky;
-    bottom: 0;
+    top: 0;
+}
+
+.hotel_content{
+    float: left;
+    width: 70%;
 }
 
 .similar_posts{
@@ -57,6 +68,7 @@
 
 .display_images{
     padding: 10px;
+    margin-top: 50px;
 }
 
 .hotel_Desc{
@@ -72,7 +84,7 @@
 }
 
 .user_reviews{
-    width: 100%;
+    width: 70%;
     max-width: 910px;
     padding: 10px;
     float: left;
@@ -99,9 +111,9 @@
 /*}*/
 
 /* Hide the images by default */
-.mySlides {
-    display: none;
-}
+/*.mySlides {*/
+/*    display: none;*/
+/*}*/
 
 .mySlides img {
 
@@ -162,10 +174,10 @@
 
 /* Six columns side by side */
 
-.big_img{
+.img-fluid{
     width: 875px;
     height:480px;
-    position: relative;
+/*    position: relative;*/
 }
 
 .small_img{

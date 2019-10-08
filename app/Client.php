@@ -14,7 +14,6 @@ class Client extends Model
         'last_name',
         'email',
         'contact_number',
-        'special_requests',
     ];
 
     public function booking()

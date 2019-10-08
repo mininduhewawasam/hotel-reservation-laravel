@@ -12,6 +12,10 @@
 */
 
 
+Route::view('/{path?}', 'app');
+
+//Route::get('/homepage','HomePageController@index');
+
 Route::get('/', 'HomePageController@getHomePage');
 
 Route::get('/hotel_post', 'HomePageController@clientSearch')->name('getSearchPost');
@@ -42,14 +46,25 @@ Route::post('/manage_hotels/get_history', 'HistoryEditController@getHistoryHotel
 
 Route::post('/manage_hotels/revert_history', 'HistoryEditController@revertHotelHistory')->name('revertBack');
 
+Route::get('/manage_hotels/current_bookings', 'AdminBookingController@getView')->name('currentBookings');
+
+Route::post('/manage_hotels/current_bookings', 'AdminBookingController@getSearchBooking')->name('searchBooking');
+
+
+
+
 //Route::get('/hotel_post', 'HotelPostController@getPost')->name('hotelPost');
 
-Route::post('/hotel_post/make_reserve','HotelPostController@reserveNow')->name('reserve_now');
+Route::post('/hotel_post/make_reserve', 'HotelPostController@reserveNow')->name('reserve_now');
 
-Route::post('/hotel_post/confirm_reserve','BookingController@confirmReserve')->name('confirm_now');
+Route::get('/hotel_post/make_reserve', 'BookingController@getbookingPage');
+
+//Route::get('/hotel_post/confirm_reserve','BookingController@confirmBookingGetView');
+
+Route::post('/hotel_post/confirm_reserve', 'BookingController@confirmReserve')->name('confirm_now');
 
 
-Route::get('/current_booking', 'BookingController@getbookingPage')->name('hotelPost');
+Route::get('/hotel_post/confirm_reserve', 'BookingController@getbookingPage');
 
 
 //Route::get('/allhotels', 'EventController@getAllAvailableHotels')->name('allHotels');
